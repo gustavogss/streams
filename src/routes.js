@@ -1,20 +1,30 @@
 import { DB } from "./db.js";
 import { randomUUID } from "node:crypto";
+import { buildRoutePath } from "./utils/build-route-path.js";
 
 const db = new DB();
 
 export const routes = [
   {
     method: "GET",
-    path: "/users",
+    path: buildRoutePath("/users"),
     handler: (req, res) => {
-      const users = db.select("users");
+      const { search } = req.query;
+      const users = db.select(
+        "users",
+        search
+          ? {
+              name: search,
+              email: search,
+            }
+          : null
+      );
       return res.end(JSON.stringify(users));
     },
   },
   {
     method: "POST",
-    path: "/users",
+    path: buildRoutePath("/users"),
     handler: (req, res) => {
       const { name, email } = req.body;
 
@@ -25,6 +35,31 @@ export const routes = [
       };
       db.insert("users", user);
       return res.writeHead(201).end("Usuário Criado");
+    },
+  },
+  {
+    method: "DELETE",
+    path: buildRoutePath("/users/:id"),
+    handler: (req, res) => {
+      const { id } = req.params;
+
+      db.delete("users", id);
+
+      return res.writeHead(204).end();
+    },
+  },
+  {
+    method: "PUT",
+    path: buildRoutePath("/users/:id"),
+    handler: (req, res) => {
+      const { id } = req.params;
+      const { name, email } = req.body;
+
+      db.update("users", id, {
+        name,
+        email,
+      });
+      return res.writeHead(204).end();
     },
   },
 ];
