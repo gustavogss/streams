@@ -7,9 +7,9 @@
 
 ## Routes
 
-- Listar Usuários: http://localhost:3333/users
+- Listar Usuários: https://streams-cyan.vercel.app/users
   
-- Criar Usuário: http://localhost:3333/users
+- Criar Usuário: https://streams-cyan.vercel.app/users
   ```
   #JSON Content
   {
@@ -17,9 +17,9 @@
   "email": "novo_usuario@email.com"
   }
   ```
-- Remover Usuário: http://localhost:3333/users/id
+- Remover Usuário: https://streams-cyan.vercel.app/users/id_do_usuario
   
-- Atualizar Usuário: http://localhost:3333/users/id  
+- Atualizar Usuário: https://streams-cyan.vercel.app/users/id_do_usuario
   ```
   #JSON Content
   {
@@ -27,7 +27,7 @@
   "email": "outro_usuario@email.com"
   }
   ```
-  - Pesquisar por Usuário: http://localhost:3333/users
+  - Pesquisar por Usuário: https://streams-cyan.vercel.app/users
 ```
 #Query Parameters
 
